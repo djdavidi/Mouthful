@@ -1,4 +1,5 @@
 <section id="home">
-    <fullstack-logo></fullstack-logo>
-    <rando-greeting></rando-greeting>
+	<div ui-ace ng-model="aceValue"></div>
+    <p ng-bind="thing"></p>
+    <button ng-click="start()">{{toStop}}</button>
 </section>
