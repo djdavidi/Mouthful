@@ -1,5 +1,11 @@
 <section id="home">
-	<div ui-ace ng-model="aceValue"></div>
-    <p ng-bind="thing"></p>
-    <button ng-click="start()">{{toStop}}</button>
+	Timer:{{time}}
+	<div class="col-sm-6">
+	<div ui-ace="{showGutter: true,
+  theme:'dawn', mode:'javascript',onLoad : aceLoaded}" ng-model="aceValue"></div>
+    </div>
+    <div class="col-sm-6 lefter">
+    <p>Spoken:{{pureText}}</p>
+    </div>
+    <button ng-click="changeSpeak()"> Click me to: {{currentSpeaking}}</button>
 </section>
