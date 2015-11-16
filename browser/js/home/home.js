@@ -39,16 +39,16 @@ app.controller("HomeCtrl",function($scope){
     // have different file-tabs slash states that can be go-to'd as well
 
 
-	window.speechSynthesis.onvoiceschanged = function () {
-	    var voices = speechSynthesis.getVoices();
-	    var voice = voices.filter(function (voice) {
-	        return voice.name == 'Daniel';
-	    })[0];
-	    var greeting = new SpeechSynthesisUtterance();
-	    greeting.voice = voice;
-	    greeting.text = 'Hello David, how are you doing today?';
-	    speechSynthesis.speak(greeting);
-	}
+	// window.speechSynthesis.onvoiceschanged = function () {
+	//     var voices = speechSynthesis.getVoices();
+	//     var voice = voices.filter(function (voice) {
+	//         return voice.name == 'Daniel';
+	//     })[0];
+	//     var greeting = new SpeechSynthesisUtterance();
+	//     greeting.voice = voice;
+	//     greeting.text = 'Hello David, how are you doing today?';
+	//     speechSynthesis.speak(greeting);
+	// }
 
         // check that your browser supports the API
         if (!('webkitSpeechRecognition' in window)) {
@@ -78,10 +78,9 @@ app.controller("HomeCtrl",function($scope){
                 if(event.results[0].isFinal){
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                 		var individualResult=event.results[i][0].transcript
-                		$scope.pureText+=individualResult;
-                        finalTranscript+=individualResult;
+                		$scope.pureText+=individualResult+"....";
+                    finalTranscript+=individualResult;
                 	}
-                $scope.pureText+="\n";
                 var x=finalTranscript.split(" ");
                 console.log("finalsplice:    ",x);
                 	$scope.$digest();
@@ -109,6 +108,11 @@ app.controller("HomeCtrl",function($scope){
             }
             }   
    var SpeechCtrl = function(commandArray){
+    var aceCommands={
+      move:function(){
+        aceEditor.goto();
+      }
+    }
    		var predefined={
 	   		times:"*",
 	   		plus:"+",
@@ -119,17 +123,11 @@ app.controller("HomeCtrl",function($scope){
 	   		quote:"'",
 	   		openParens:"(",
 	   		closeParens:")",
-			equals:"="
+			  equals:"=",
+        dot="."
 
    		}
    		var commands={
-   			create:function(comman){
-
-
-   			},
-   			move:function(){
-   			// _editor go to
-   			},
    			function:function(arr){
    				console.log("function")
    				var params=""
@@ -137,7 +135,7 @@ app.controller("HomeCtrl",function($scope){
    				//have to do loops in all of these, or maybe at the end run through all the strings
    				// and switch those predfineds for their value
    				// have to loop through all the stuff until stop then do the rest
-   				if(arr[2]=="parameters"){
+   				if(arr[3]=="parameters"){
    				//splice out "function with parameters"
    					arr.splice(0,3)
    				for(var i=0; i<arr.length; i++){
@@ -151,30 +149,36 @@ app.controller("HomeCtrl",function($scope){
    					//"function with no parameters"
    					arr.splice(0,4)
    				}
-
+          // need to leave space for the name
+          //if the whatever isnt equal to with, then make that the name else name=""
    				var result="function("+params+"){"+"\n"
 				var third="}"
-				var result= first+arr[0]+second+arr[1]+third+predefined.semi;
+				
+        var result= first+arr[0]+second+arr[1]+third+predefined.semi;
 
 				doIt(result)
    			}
 
    		}
-
+      //Test- create function with parameters x and y stop
+    if(commandArray[0]=="create"){
    	for(var c in commands){
-   		if(c==commandArray[0]){
+   		if(c==commandArray[1]){
    			console.log("c",c)
    			commands.function(commandArray)
    		}
    		//if it matches variable in the current scope then find that, then either replace or equal
    	}
+   }
+   // if(literal);
+   // or cycle through the ace editor
 
 
 
    	//function, array, object.. with params, keys, items
 
 
-   	function doIt(result){
+   	doIt =function(result){
    		console.log("do it")
    		aceEditor.insert(result);
    	}

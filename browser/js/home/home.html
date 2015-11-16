@@ -1,11 +1,20 @@
 <section id="home">
-	Timer:{{time}}
 	<div class="col-sm-6">
 	<div ui-ace="{showGutter: true,
   theme:'dawn', mode:'javascript',onLoad : aceLoaded}" ng-model="aceValue"></div>
     </div>
-    <div class="col-sm-6 lefter">
-    <p>Spoken:{{pureText}}</p>
+    <div class="col-sm-3 lefter">
+    <p class="headier">Spoken</p>
+    <p>Start:{{pureText}}</p>
     </div>
-    <button ng-click="changeSpeak()"> Click me to: {{currentSpeaking}}</button>
+	<div class="col-sm-3 comm">
+	<div class="row">
+	<p class="headier">Commands</p>
+	</div>
+	<div class="row">
+	<p>Create:function,array,object</p>
+	<button ng-click="changeSpeak()"> Click me to {{currentSpeaking}}</button>
+	</div>
+	</div>
+   
 </section>

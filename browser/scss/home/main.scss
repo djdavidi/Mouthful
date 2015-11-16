@@ -17,5 +17,31 @@ background-color: yellow;
 }
 
 .lefter{
-	background-color: orange;
+	background-color: rgba(0,0,0,.2);
+  border-radius: 15px;
+  border: 5px;
+  height:500px;
+  border-style: ridge;
+  border-color: black;
+
+}
+.titular{
+  font-family: 'Indie Flower', cursive;
+}
+
+.comm{
+  background-color: rgba(0,0,0,.2);
+  border: 5px;
+  border-radius: 15px;
+  height:500px;
+  border-style: ridge;
+  border-color: black;
+}
+
+.headier{
+  font-size: 25px;
+}
+
+.spacer{
+  background-color: black;
 }
