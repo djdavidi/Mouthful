@@ -14,6 +14,7 @@
       $scope.aceValue=""
       $scope.pureText="";
       $scope.currentSpeaking="Start"
+      //$scope.timeLeft=0;
       //make this so when you find it changes this and then replace would change this,
       //but if you move or something else in between then it wont,
       $scope.currentSelectedText;
@@ -25,7 +26,11 @@
       	aceEditor=_editor;
       	_editor.$blockScrolling = Infinity;
       }
-      //it will automatically cycle every 50 seconds
+
+      // $scope.timer(){
+      //   $scope.changeSpeak()  
+      // }
+      // //it will automatically cycle every 50 seconds
      	// have a counter on the side
       // ace commands--- goto, find	
       // need a replace to wipe a line, openline to 
@@ -119,6 +124,7 @@
           semi:";\n",
           quote:"'",
           parentheses:"()",
+          Parentheses:"()",
           equals:"=",
           dot:".",
           array:"[]",
@@ -167,8 +173,14 @@
           aceEditor.find(arr[2]);
           aceEditor.replace(arr[4]);
         },
-        delete:function(arr){
+        remove:function(arr){
+          console.log("hey")
           aceEditor.remove(arr[3])
+        },
+        all:function(arr){
+          console.log("a;;")
+          aceEditor.selectAll()
+          aceEditor.removeLines();
         }
       };
      		var commands={
