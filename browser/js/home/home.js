@@ -130,6 +130,7 @@
         aceEditor.insert(result+"\n");
       }
       function replacePredefined(arr){
+        console.log("prev arr",arr)
         var contents="";
         arr.forEach(function(elem,index){
             for(var k in predefined){
@@ -142,6 +143,7 @@
         arr.forEach(function(elem){
           contents+=elem+" ";
         })
+        console.log("return value", contents)
         return contents;
       }
 
@@ -248,10 +250,18 @@
             doIt(result)
           },
           objector:function(arr){
-            //create object [name] with x =5 , y=10
-            var result="var"+arr[2]+"{";
-            var otherHalf= replacePredefined(arr.splice(0,3))+"\n}"
-
+            //create object [name] with x =5 comma y=10
+            var result="var "+arr[2]+"={\n";
+            arr.splice(0,4)
+            var otherHalf= replacePredefined(arr)+"\n}"
+            var newHalf=""
+            for(var i=0; i<otherHalf.length; i++){
+              if(otherHalf[i]==",") newHalf+=",\n";
+              else{
+                newHalf+=otherHalf[i];
+              }
+            }
+            doIt(result+newHalf);
           }
 
      		}

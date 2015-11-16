@@ -3,22 +3,23 @@
 	<div ui-ace="{showGutter: true,
   theme:'dawn', mode:'javascript',onLoad : aceLoaded}" ng-model="aceValue"></div>
     </div>
-    <div class="col-sm-3 lefter">
+    <div class="col-sm-2 lefter">
     <p class="headier">Spoken</p>
     <p>Start:{{pureText}}</p>
     </div>
-	<div class="col-sm-3 comm">
+	<div class="col-sm-4 comm">
 	<div class="row">
 	<p class="headier">Commands</p>
 	</div>
 	<div class="row">
-	<p>Test: Create fun [name] with parameters [param] and [param], stop.
-	variable x = one times two semi return x </p>
-	<p>Test : Editor move to line 10 </p>
 	<p>Test: Create express [name] [verb] [route]</p>
 	<p> Test: Create variable hello=5</p>
+	<p>Test : Editor move to line 10 </p>
+	<p> Test: Create objector [name] with [var] equals 5 comma [var] equals 10</p>
+	<p>Test: Create fun [name] with parameters [param] and [param], stop.
+	variable x = one times two semi return x </p>
 	<p>Create:Function,array,object,variable</p>
-	<p>Editor:Move,find,replace,delete</p>
+	<p>Editor:Move[to end][to line #],find,replace,delete</p>
 	<p>Literal: For commands that are not contained e.g .push()</p>
 	<p>Predefined Terms: plus,minus, modulo etc</p>
 	<button ng-click="changeSpeak()"> Click me to {{currentSpeaking}}</button>
