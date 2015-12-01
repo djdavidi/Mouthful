@@ -55,7 +55,6 @@
   	//     speechSynthesis.speak(greeting);
   	// }
 
-          // check that your browser supports the API
           if (!('webkitSpeechRecognition' in window)) {
               alert("Sorry, no speaking for you today");
           } else{
@@ -63,23 +62,18 @@
               recognition.continuous = true;         // keep processing input until stopped
               recognition.interimResults = true;     // show interim results
               recognition.lang = 'en-US';           // specify the language
-
               recognition.onstart = function() {
               	console.log("Onstart system online")
                   recognizing = true;
               };
-
               recognition.onerror = function(event) {
                   console.log("Error in the recognition mainframe",event);
               };
-
               recognition.onend = function() {
                   recognizing = false;
                   console.log("Ended recognition")
               };
-
-              recognition.onresult = function(event) {
-                  
+              recognition.onresult = function(event) {  
                   if(event.results[0].isFinal){
                   for (var i = event.resultIndex; i < event.results.length; ++i) {
                   		var individualResult=event.results[i][0].transcript
@@ -90,12 +84,9 @@
                   console.log("finalsplice:    ",x);
                   	$scope.$digest();
                   }
-                  // update the page
                   if(finalTranscript.length > 0) {
-                  	SpeechCtrl(x)
-                      // $('#transcript').html(finalTranscript);
+                  	  SpeechCtrl(x)
                       recognition.stop();
-                      // $('#start_button').html('Click to Start Again');
                       recognizing = false;
                   }
               };
@@ -174,11 +165,9 @@
           aceEditor.replace(arr[4]);
         },
         remove:function(arr){
-          console.log("hey")
           aceEditor.remove(arr[3])
         },
         all:function(arr){
-          console.log("a;;")
           aceEditor.selectAll()
           aceEditor.removeLines();
         }
@@ -277,7 +266,6 @@
           }
 
      		}
-        //Test- create function with parameters x and y stop
       if(commandArray[0]=="create"){
      	for(var c in commands){
      		if(c==commandArray[1]){
