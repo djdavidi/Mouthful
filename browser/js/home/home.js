@@ -43,18 +43,6 @@
       // parens-- exit Parens
       // have different file-tabs slash states that can be go-to'd as well
 
-
-  	// window.speechSynthesis.onvoiceschanged = function () {
-  	//     var voices = speechSynthesis.getVoices();
-  	//     var voice = voices.filter(function (voice) {
-  	//         return voice.name == 'Daniel';
-  	//     })[0];
-  	//     var greeting = new SpeechSynthesisUtterance();
-  	//     greeting.voice = voice;
-  	//     greeting.text = 'Hello David, how are you doing today?';
-  	//     speechSynthesis.speak(greeting);
-  	// }
-
           if (!('webkitSpeechRecognition' in window)) {
               alert("Sorry, no speaking for you today");
           } else{
@@ -88,6 +76,7 @@
                   	  SpeechCtrl(x)
                       recognition.stop();
                       recognizing = false;
+                      
                   }
               };
               $scope.changeSpeak=function(){
@@ -124,14 +113,15 @@
         };
       function doIt(result){
         console.log("do it")
+        //questionable whether we always want a new line, what if i insert an edit 
         aceEditor.insert(result+"\n");
       }
-      function replacePredefined(arr){
+      function replacePredefined(arr,functionThatCalled){
         console.log("prev arr",arr)
         var contents="";
         arr.forEach(function(elem,index){
             for(var k in predefined){
-              if(elem==k){
+              if(elem==k && (functionThatCalled !="objector" && elem!="equals")){
                 arr[index]= predefined[k];
               }
             }
@@ -254,7 +244,7 @@
             //create object [name] with x =5 comma y=10
             var result="var "+arr[2]+"={\n";
             arr.splice(0,4)
-            var otherHalf= replacePredefined(arr)+"\n}"
+            var otherHalf= replacePredefined(arr,"objector")+"\n}"
             var newHalf=""
             for(var i=0; i<otherHalf.length; i++){
               if(otherHalf[i]==",") newHalf+=",\n";
@@ -264,6 +254,7 @@
             }
             doIt(result+newHalf);
           }
+          //require "express", require local "./express"
 
      		}
       if(commandArray[0]=="create"){
